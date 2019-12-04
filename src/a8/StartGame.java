@@ -13,8 +13,7 @@ public class StartGame implements ActionListener {
 	public StartGame(JSpotBoard board, int x, int y) {
 		_board = board;
 		neighbor_count = new int[x][y];
-		
-		System.out.println(board.getSpotHeight());
+		//System.out.println(board.getSpotAt(1, 1).getBackground());
 	}
 
 	@Override
@@ -31,33 +30,33 @@ public class StartGame implements ActionListener {
 				//System.out.println(s.getBackground());
 			
 			
-				if (x!=_board.getSpotWidth()-1 && _board.getSpotAt(x+1, y).getBackground().equals( Color.BLACK)) {
+				if (x!=_board.getSpotWidth()-1 && _board.getSpotAt(x+1, y).getBackground()==( Color.BLACK)) {
 					count ++;
-				} else if (x!=0 && _board.getSpotAt(x-1, y).getBackground().equals(Color.BLACK)) {
+				} else if (x!=0 && _board.getSpotAt(x-1, y).getBackground()==(Color.BLACK)) {
 					count ++;
-				} else if (y!=_board.getSpotHeight()-1 && _board.getSpotAt(x, y+1).getBackground().equals(Color.BLACK)) {
+				} else if (y!=_board.getSpotHeight()-1 && _board.getSpotAt(x, y+1).getBackground()==(Color.BLACK)) {
 					count ++;
-				} else if (y!=0 && _board.getSpotAt(x, y-1).getBackground().equals(Color.BLACK) ){
+				} else if (y!=0 && _board.getSpotAt(x, y-1).getBackground()==(Color.BLACK) ){
 					count ++;
-				} else if (x!=_board.getSpotWidth()-1 && y!=_board.getSpotHeight()-1 && _board.getSpotAt(x+1, y+1).getBackground().equals(Color.BLACK)) {
+				} else if (x!=_board.getSpotWidth()-1 && y!=_board.getSpotHeight()-1 && _board.getSpotAt(x+1, y+1).getBackground()==(Color.BLACK)) {
 					count ++;
-				} else if (x!=_board.getSpotWidth()-1 && y!=0 && _board.getSpotAt(x+1, y-1).getBackground().equals( Color.BLACK)) {
+				} else if (x!=_board.getSpotWidth()-1 && y!=0 && _board.getSpotAt(x+1, y-1).getBackground()==( Color.BLACK)) {
 					count ++;
-				} else if (x!=0 && y!=_board.getSpotHeight()-1 && _board.getSpotAt(x-1, y+1).getBackground().equals(Color.BLACK)) {
+				} else if (x!=0 && y!=_board.getSpotHeight()-1 && _board.getSpotAt(x-1, y+1).getBackground()==(Color.BLACK)) {
 					count ++;
-				} else if (x!=0 && y!=0 && _board.getSpotAt(x-1, y-1).getBackground().equals(Color.BLACK)) {
+				} else if (x!=0 && y!=0 && _board.getSpotAt(x-1, y-1).getBackground()==(Color.BLACK)) {
 					count ++;
 				}
 				neighbor_count[x][y] = count;
-				//System.out.println(neighbor_count[1][1]);
+				
 			}
 			
 			for (Spot s: _board) {
 				
-				if (s.getBackground().equals(Color.BLACK)) {
+				if (s.getBackground()==(Color.BLACK)) {
 					if (neighbor_count[s.getSpotX()][s.getSpotY()] <2) {
 						s.setBackground(DEFAULT);	
-					}  else if (s.getBackground().equals(Color.black)) {
+					}  else if (s.getBackground()==(Color.black)) {
 						if (neighbor_count[s.getSpotX()][s.getSpotY()] ==2 || neighbor_count[s.getSpotX()][s.getSpotY()] ==3) {
 						s.setBackground(Color.BLACK);
 						}

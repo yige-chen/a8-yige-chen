@@ -45,7 +45,7 @@ public class GameOfLifeWidget extends JPanel implements  SpotListener{
 	
 			/* Reset button. Add ourselves as the action listener. */
 			ResetGame reset = new ResetGame(_board);
-			StartGame start = new StartGame(_board,x,y);
+			StartGame start = new StartGame(_board,_board.getSpotWidth(), _board.getSpotHeight());
 			
 			JButton reset_button = new JButton("Restart");
 			JButton start_button = new JButton("Start");
