@@ -14,10 +14,14 @@ public class SizePlus implements ActionListener {
 	private JSpotBoard _board;
 	private JTextField _x;
 	private JTextField _y;
+	private JTextField _up;
+	private JTextField _down;
 	
-	public SizePlus(JTextField x, JTextField y) {
+	public SizePlus(JTextField x, JTextField y, JTextField upper, JTextField lower ) {
 		_x = x;
 		_y = y;
+		_up = upper;
+		_down = lower;
 	}
 
 	@Override
@@ -39,8 +43,15 @@ public class SizePlus implements ActionListener {
 		/* Create ExampleWidget component and put into center
 		 * of content panel.
 		 */
-		GameOfLifeWidget ttt = new GameOfLifeWidget(Integer.parseInt(_x.getText()), Integer.parseInt(_y.getText()));
-		top_panel.add(ttt);
+		if (Integer.parseInt(_up.getText()) == 3 && Integer.parseInt(_down.getText()) == 2) {
+			GameOfLifeWidget ttt = new GameOfLifeWidget(Integer.parseInt(_x.getText()), Integer.parseInt(_y.getText()));
+			top_panel.add(ttt);
+		} else {
+			GameOfLifeWidget ttt = new GameOfLifeWidget(Integer.parseInt(_x.getText()), Integer.parseInt(_y.getText()), Integer.parseInt(_up.getText()), Integer.parseInt(_down.getText()));
+			top_panel.add(ttt);
+		}
+		
+		
 
 		/* Pack main frame and make visible. */
 		

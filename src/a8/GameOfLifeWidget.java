@@ -73,6 +73,134 @@ public class GameOfLifeWidget extends JPanel implements  SpotListener{
 			
 			add(reset_message_panel, BorderLayout.SOUTH);
 			
+			JPanel panel = new JPanel();
+			
+			panel.setLayout(new BorderLayout());
+			
+			add(panel, BorderLayout.NORTH);
+			
+			JPanel upper_panel = new JPanel();
+			
+			upper_panel.setLayout(new BorderLayout());
+			
+			JPanel upper_panel_1 = new JPanel();
+			upper_panel_1.setLayout(new BorderLayout());
+			JPanel upper_panel_2 = new JPanel();
+			upper_panel_2.setLayout(new BorderLayout());
+			
+			JTextField x = new JTextField(3);
+			upper_panel_1.add(new JLabel("Width (10~500): "), BorderLayout.WEST);		
+			x.setText("10");
+			upper_panel_1.add(x,  BorderLayout.EAST);
+			
+			JTextField y= new JTextField(3);
+			upper_panel_2.add(new JLabel("Height (10~500): "), BorderLayout.WEST);		
+			y.setText("10");
+			upper_panel_2.add(y,  BorderLayout.EAST);
+			
+			upper_panel.add(upper_panel_1, BorderLayout.NORTH);
+			upper_panel.add(upper_panel_2, BorderLayout.CENTER);
+			upper_panel.add(new JLabel("The default game follows weki (only become live with 3 neighbors), but the new game follows KMP."), BorderLayout.SOUTH);
+			panel.add(upper_panel, BorderLayout.NORTH);
+			
+			
+			JPanel lower_panel = new JPanel();
+			
+			lower_panel.setLayout(new BorderLayout());
+			
+			JPanel lower_panel_1 = new JPanel();
+			lower_panel_1.setLayout(new BorderLayout());
+			JPanel lower_panel_2 = new JPanel();
+			lower_panel_2.setLayout(new BorderLayout());
+			
+			JTextField upper = new JTextField(3);
+		    lower_panel_1.add(new JLabel("Upper Threshold: "), BorderLayout.WEST);		
+			upper.setText("3");
+			lower_panel_1.add(upper,  BorderLayout.EAST);
+			
+			JTextField lower= new JTextField(3);
+			lower_panel_2.add(new JLabel("Lower Threshold: "), BorderLayout.WEST);		
+			lower.setText("2");
+			lower_panel_2.add(lower,  BorderLayout.EAST);
+			
+			lower_panel.add(lower_panel_1, BorderLayout.NORTH);
+			lower_panel.add(lower_panel_2, BorderLayout.CENTER);
+			
+			
+			SizePlus size = new SizePlus(x,y,upper,lower);
+			
+			JButton size_button1  = new JButton("New Game");
+			size_button1.addActionListener(size);
+			lower_panel.add(size_button1, BorderLayout.SOUTH);
+			
+			panel.add(lower_panel,BorderLayout.SOUTH);
+			/* Add ourselves as a spot listener for all of the
+			 * spots on the spot board.
+			 */
+			_board.addSpotListener(this);
+	
+			/* Reset game. */
+			resetGame();
+			
+		}
+		
+		
+		public GameOfLifeWidget(int _x, int _y, int up, int down) {
+			
+/* Create SpotBoard and message label. */
+/* Create SpotBoard and message label. */
+			
+			
+			_message = new JLabel();
+			
+			/* Set layout and place SpotBoard at center. */
+			
+			setLayout(new BorderLayout());
+			
+			_board = new JSpotBoard(_x,_y);
+			
+			for(Spot s: _board) {
+				s.setBackground(DEFAULT);
+			}
+			
+			add(_board, BorderLayout.CENTER);
+	
+			/* Create subpanel for message area and reset button. */
+			
+			JPanel reset_message_panel = new JPanel();
+			reset_message_panel.setLayout(new BorderLayout());
+			
+	
+			/* Reset button. Add ourselves as the action listener. */
+			ResetGame reset = new ResetGame(_board);
+			StartGame start = new StartGame(_board,_board.getSpotWidth(), _board.getSpotHeight(), up, down);
+			RandomFill random = new RandomFill(_board);
+			
+			
+			JButton reset_button = new JButton("Restart");
+			JButton start_button = new JButton("Advance");
+			JButton random_button  = new JButton("Random fill");
+			
+			//JButton stop_button = new JButton("Stop");
+			
+			reset_button.addActionListener(reset);
+			start_button.addActionListener(start);
+			random_button.addActionListener(random);
+			
+			reset_message_panel.add(reset_button, BorderLayout.EAST);
+			reset_message_panel.add(start_button, BorderLayout.WEST);
+			reset_message_panel.add(random_button, BorderLayout.CENTER);
+			
+			/* Add subpanel in south area of layout. */
+			
+			add(reset_message_panel, BorderLayout.SOUTH);
+			
+			JPanel panel = new JPanel();
+			
+			panel.setLayout(new BorderLayout());
+			
+			add(panel, BorderLayout.NORTH);
+			
 			JPanel upper_panel = new JPanel();
 			
 			upper_panel.setLayout(new BorderLayout());
@@ -95,16 +223,41 @@ public class GameOfLifeWidget extends JPanel implements  SpotListener{
 			upper_panel.add(upper_panel_1, BorderLayout.NORTH);
 			upper_panel.add(upper_panel_2, BorderLayout.CENTER);
 			
-			SizePlus size = new SizePlus(x,y);
+			upper_panel.add(new JLabel("The default game follows weki (only become live with 3 neighbors), but the new game follows KMP."), BorderLayout.SOUTH);
 			
-			JButton size_button1  = new JButton("New Game In Another Size");
+			panel.add(upper_panel, BorderLayout.NORTH);
 			
 			
+			JPanel lower_panel = new JPanel();
+			
+			lower_panel.setLayout(new BorderLayout());
+			
+			JPanel lower_panel_1 = new JPanel();
+			lower_panel_1.setLayout(new BorderLayout());
+			JPanel lower_panel_2 = new JPanel();
+			lower_panel_2.setLayout(new BorderLayout());
+			
+			JTextField upper = new JTextField(3);
+		    lower_panel_1.add(new JLabel("Upper Threshold: "), BorderLayout.WEST);		
+			upper.setText("3");
+			lower_panel_1.add(upper,  BorderLayout.EAST);
+			
+			JTextField lower= new JTextField(3);
+			lower_panel_2.add(new JLabel("Lower Threshold: "), BorderLayout.WEST);		
+			lower.setText("2");
+			lower_panel_2.add(lower,  BorderLayout.EAST);
+			
+			lower_panel.add(lower_panel_1, BorderLayout.NORTH);
+			lower_panel.add(lower_panel_2, BorderLayout.CENTER);
+			
+			
+			SizePlus size = new SizePlus(x,y,upper,lower);
+			
+			JButton size_button1  = new JButton("New Game");
 			size_button1.addActionListener(size);
+			lower_panel.add(size_button1, BorderLayout.SOUTH);
 			
-			upper_panel.add(size_button1, BorderLayout.SOUTH);
-		
-			add(upper_panel, BorderLayout.NORTH);
+			panel.add(lower_panel,BorderLayout.SOUTH);
 			/* Add ourselves as a spot listener for all of the
 			 * spots on the spot board.
 			 */
@@ -112,7 +265,6 @@ public class GameOfLifeWidget extends JPanel implements  SpotListener{
 	
 			/* Reset game. */
 			resetGame();
-			
 		}
 	
 		/* resetGame
