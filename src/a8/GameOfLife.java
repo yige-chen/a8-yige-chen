@@ -1,17 +1,21 @@
 package a8;
 
+
+
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class GameOfLifeGame {
+
+
+public class GameOfLife {
 	public static void main(String[] args) {
 			
 			/* Create top level window. */
 			
 			JFrame main_frame = new JFrame();
-			main_frame.setTitle("Game of life");
+			main_frame.setTitle("Example");
 			main_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 			/* Create panel for content. Uses BorderLayout. */
@@ -22,17 +26,18 @@ public class GameOfLifeGame {
 			/* Create ExampleWidget component and put into center
 			 * of content panel.
 			 */
-			SetUpWidget setup = new SetUpWidget();
-			top_panel.add(setup);
 			
-			
-			GameOfLifeWidget ttt = new GameOfLifeWidget(setup.getX(),setup.getY());
+			GameOfLifeWidget ttt = new GameOfLifeWidget(10,10);
 			top_panel.add(ttt, BorderLayout.CENTER);
 	
 	
 			/* Pack main frame and make visible. */
 			
 			main_frame.pack();
-			main_frame.setVisible(true);		
-		}
+			main_frame.setVisible(true);	
+		
+	}
 }
+
+
+
